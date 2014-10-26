@@ -1,8 +1,6 @@
-Getting-and-cleaning-data
+Getting-and-cleaning-data Repo Overview
 =========================
 
-Overview
-=======
 Stores project files for submission and datasets related to Johns Hopkins Getting and Cleaning data course for Joanna Teo
 
 
