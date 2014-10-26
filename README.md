@@ -2,4 +2,4 @@ Getting-and-cleaning-data
 =========================
 
 Getting and Cleaning data course repository
-Stores projetc files and datasets related to course
+Stores project files and datasets related to course
