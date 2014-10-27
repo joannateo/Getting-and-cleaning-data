@@ -24,12 +24,36 @@ rm(list=ls())
 ls()
 # should return -  character(0)
 
-# Step 1. Merge the training and the test sets to create one data set.
+# Task 1. Merge the training and the test sets to create one data set.
 
-#set working directory to the location where the UCI HAR Dataset was unzipped to and perform a check to confirm wd
-setwd('/Users/jteo/Desktop/coursera/UCI HAR Dataset');
-getwd()
-# should return -  [1] "C:/Users/jteo/Desktop/coursera/UCI HAR Dataset"
+
+# Download the file and unzip
+fileurl<-"https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+download.file(fileurl, destfile="./Dataset.zip")
+unzip("./Dataset.zip", files = NULL, list = FALSE, overwrite = TRUE,
+      junkpaths = FALSE, exdir = ".", unzip = "internal",
+      setTimes = FALSE)
+
+pathIn <- file.path(getwd(), "UCI HAR Dataset")
+list.files(pathIn, recursive = TRUE)
+
+# Load and install library required
+
+if (!require("data.table")) {
+        install.packages("data.table")
+}
+
+if (!require("reshape2")) {
+        install.packages("reshape2")
+}
+
+if (!require("dplyr")) {
+        install.packages("dplyr")
+}
+
+require("data.table")
+require("reshape2")
+require("dplyr")
 
 # Read in the data from all the train and test files. I also opened up the files on their own to have a glimpse of the columns available
 activityType <- read.table('./activity_labels.txt',header=FALSE); #imports activity_labels.txt
@@ -67,7 +91,7 @@ colNames  <- colnames(finalData);
 
 
 
-# Step 2. Extract only the measurements on the mean and standard deviation for each measurement. 
+# Task 2. Extract only the measurements on the mean and standard deviation for each measurement. 
 
 # Create a logical Vector that contains TRUE values for the ID, mean() & stddev() columns and FALSE for others
 logicalVector <- (grepl("activity..",colNames) | grepl("subject..",colNames) | grepl("-mean..",colNames) & !grepl("-meanFreq..",colNames) & !grepl("mean..-",colNames) | grepl("-std..",colNames) & !grepl("-std()..-",colNames));
@@ -75,7 +99,7 @@ logicalVector <- (grepl("activity..",colNames) | grepl("subject..",colNames) | g
 # Subset finalData table based on the logicalVector to keep only desired columns
 finalData <- finalData[logicalVector==TRUE];
 
-# Step 3. Use descriptive activity names to name the activities in the data set
+# Task 3. Use descriptive activity names to name the activities in the data set
 
 # Merge the finalData set with the acitivityType table to include descriptive activity names
 finalData <- merge(finalData,activityType,by='activityId',all.x=TRUE);
@@ -83,7 +107,7 @@ finalData <- merge(finalData,activityType,by='activityId',all.x=TRUE);
 # Updating the colNames vector to include the new column names after merge
 colNames  <- colnames(finalData); 
 
-# Step 4. Appropriately label the data set with descriptive activity names. 
+# Task 4. Appropriately label the data set with descriptive activity names. 
 
 # Cleaning up the variable names using for loop and gsub
 for (i in 1:length(colNames)) 
@@ -105,7 +129,7 @@ for (i in 1:length(colNames))
 # Reassigning the new descriptive column names to the finalData set
 colnames(finalData) <- colNames;
 
-# Step 5. Create a second, independent tidy data set with the average of each variable for each activity and each subject. 
+# Task 5. Create a second, independent tidy data set with the average of each variable for each activity and each subject. 
 
 # Create a new table, finalDataNoActivityType without the activityType column
 finalDataNoActivityType <-  finalData[,names(finalData) != 'activityType'];
@@ -118,7 +142,10 @@ tidyData   <-  aggregate(finalDataNoActivityType[,
                         mean);
 
 # Merging the tidyData with activityType to include descriptive acitvity names
-tidyData    <- merge(tidyData,activityType,by='activityId',all.x=TRUE);
+tidyData    = merge(tidyData,activityType,by='activityId',all.x=TRUE);
 
 # Export the tidyData set 
 write.table(tidyData, './tidyData.txt',row.names=TRUE,sep='\t');
+
+#print tidyData
+tidyData
