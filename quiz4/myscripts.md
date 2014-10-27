@@ -79,5 +79,5 @@ Original data sources: http://data.worldbank.org/data-catalog/GDP-ranking-table
 > sampleTime_2012_weekday<-weekdays(sampleTime_2012)
 > table(grepl("^Monday",sampleTime_2012_weekday))
 
-####result 1 should be FALSE 203  TRUE 47
+####result 2 should be FALSE 203  TRUE 47
 ####answer: 250, 47
