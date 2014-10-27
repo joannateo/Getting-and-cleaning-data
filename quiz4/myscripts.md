@@ -14,7 +14,7 @@ Apply strsplit() to split all the names of the data frame on the characters "wgt
 > splitNames<-strsplit(names(data),"\\wgtp")
 > splitNames[[123]]
 
-##### answer: returns [1] ""   "15"
+###### answer: returns [1] ""   "15"
 
 ###Question 2
 Load the Gross Domestic Product data for the 190 ranked countries in this data set: 
@@ -36,7 +36,7 @@ Original data sources: http://data.worldbank.org/data-catalog/GDP-ranking-table
 > gdp<-as.numeric(gdp3)
 > mean(gdp)
 
-##### answer: it should print [1] 377652.4
+###### answer: it should print [1] 377652.4
 
 ######Still trying to figure out the dplyr chaining method. this is still WIP. doesn't work
  > data<-read.csv("https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FGDP.csv")
@@ -52,8 +52,8 @@ Original data sources: http://data.worldbank.org/data-catalog/GDP-ranking-table
 > countryNames<-country[5:194]
 > table(grepl("^United",countryNames))
 
-####result should be FALSE 187  TRUE 3
-####answer: grepl("^United",countryNames), 3
+######result should be FALSE 187  TRUE 3
+######answer: grepl("^United",countryNames), 3
 
 ###Question 4 
 > data1<-read.csv("https://d396qusza40orc.cloudfront.net/getdata/data/GDP.csv")
@@ -61,8 +61,8 @@ Original data sources: http://data.worldbank.org/data-catalog/GDP-ranking-table
 > fiscalYear<-data2$Special.Notes
 > table(grepl("^Fiscal year end: June",fiscalYear))
 
-####result should be FALSE 221  TRUE 13
-####answer: 13
+######result should be FALSE 221  TRUE 13
+######answer: 13
 
 
 ###Question 5
@@ -79,5 +79,5 @@ Original data sources: http://data.worldbank.org/data-catalog/GDP-ranking-table
 > sampleTime_2012_weekday<-weekdays(sampleTime_2012)
 > table(grepl("^Monday",sampleTime_2012_weekday))
 
-####result 2 should be FALSE 203  TRUE 47
-####answer: 250, 47
+######result 2 should be FALSE 203  TRUE 47
+######answer: 250, 47
