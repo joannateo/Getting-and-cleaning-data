@@ -15,7 +15,7 @@
 # 4. Appropriately label the data set with descriptive activity names. 
 # 5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
 
-
+# Simply copy and paste the following script to write a tidyData file and print on screen.
 ##########################################################################################################
 
 
